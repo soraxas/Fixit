@@ -10,7 +10,6 @@ import libcst.matchers as m
 
 from fixit import Invalid, LintRule, Valid
 
-
 LineType = Union[cst.BaseSmallStatement, cst.BaseStatement]
 
 
@@ -57,9 +56,7 @@ class SortedAttributes(LintRule):
            """,
         )
     ]
-    VALID = [
-        Valid(
-            """
+    VALID = [Valid("""
             class MyConstants:
                 \"\"\"
                 @sorted-attributes
@@ -70,9 +67,7 @@ class SortedAttributes(LintRule):
             class MyUnsortedConstants:
                 B = 'aaa234'
                 A = 'zzz123'
-           """
-        )
-    ]
+           """)]
     MESSAGE: str = (
         "It appears you are using the @sorted-attributes directive and the class variables are unsorted. See the lint autofix suggestion."
     )

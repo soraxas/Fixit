@@ -21,30 +21,23 @@ class NoRedundantArgumentsSuper(LintRule):
         + "https://www.python.org/dev/peps/pep-3135/"
     )
     VALID = [
-        Valid(
-            """
+        Valid("""
             class Foo(Bar):
                 def foo(self, bar):
                     super().foo(bar)
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             class Foo(Bar):
                 def foo(self, bar):
                     super(Bar, self).foo(bar)
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             class Foo(Bar):
                 @classmethod
                 def foo(cls, bar):
                     super(Bar, cls).foo(bar)
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             class Foo:
                 class InnerBar(Bar):
                     def foo(self, bar):
@@ -53,8 +46,7 @@ class NoRedundantArgumentsSuper(LintRule):
                 class InnerFoo(InnerBar):
                     def foo(self, bar):
                         super(InnerBar, self).foo(bar)
-            """
-        ),
+            """),
     ]
     INVALID = [
         Invalid(

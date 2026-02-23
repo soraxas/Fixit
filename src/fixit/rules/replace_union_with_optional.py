@@ -21,24 +21,18 @@ class ReplaceUnionWithOptional(LintRule):
     )
     METADATA_DEPENDENCIES = (cst.metadata.ScopeProvider,)
     VALID = [
-        Valid(
-            """
+        Valid("""
             def func() -> Optional[str]:
                 pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             def func() -> Optional[Dict]:
                 pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             def func() -> Union[str, int, None]:
                 pass
-            """
-        ),
+            """),
     ]
     INVALID = [
         Invalid(

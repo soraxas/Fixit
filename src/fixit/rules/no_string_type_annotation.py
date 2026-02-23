@@ -24,74 +24,58 @@ class NoStringTypeAnnotation(LintRule):
 
     VALID = [
         # Usage of a Class for instantiation and typing.
-        Valid(
-            """
+        Valid("""
             from a.b import Class
 
             def foo() -> Class:
                 return Class()
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             import typing
             from a.b import Class
 
             def foo() -> typing.Type[Class]:
                 return Class
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             import typing
             from a.b import Class
             from c import func
 
             def foo() -> typing.Optional[typing.Type[Class]]:
                 return Class if func() else None
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from a.b import Class
 
             def foo(arg: Class) -> None:
                 pass
 
             foo(Class())
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from a.b import Class
 
             module_var: Class = Class()
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from typing import Literal
 
             def foo() -> Literal["a", "b"]:
                 return "a"
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             import typing
 
             def foo() -> typing.Optional[typing.Literal["a", "b"]]:
                 return "a"
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             import typing
 
             def foo() -> typing.Optional[typing.Literal["class", "function"]]:
                 return "class"
-            """
-        ),
+            """),
     ]
 
     INVALID = [

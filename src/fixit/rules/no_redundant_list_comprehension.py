@@ -8,7 +8,6 @@ import libcst.matchers as m
 
 from fixit import Invalid, LintRule, Valid
 
-
 UNNECESSARY_LIST_COMPREHENSION: str = (
     "Unnecessary list comprehension - {func} can take a generator, and is likely "
     + "to short-circuit, so constructing a list is probably wasteful."

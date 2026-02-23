@@ -12,7 +12,6 @@ from typing import Dict, Optional, Sequence, Set, Type
 import click
 
 from fixit import __version__
-
 from .api import fixit_paths, print_result
 from .config import collect_rules, generate_config, parse_rule, validate_config
 from .ftypes import Config, LSPOptions, Options, OutputFormat, QualifiedRule, Tags

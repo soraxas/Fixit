@@ -26,46 +26,34 @@ class NoNamedTuple(LintRule):
     METADATA_DEPENDENCIES = (QualifiedNameProvider,)
 
     VALID = [
-        Valid(
-            """
+        Valid("""
             @dataclass(frozen=True)
             class Foo:
                 pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             @dataclass(frozen=False)
             class Foo:
                 pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             class Foo:
                 pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             class Foo(SomeOtherBase):
                 pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             @some_other_decorator
             class Foo:
                 pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             @some_other_decorator
             class Foo(SomeOtherBase):
                 pass
-            """
-        ),
+            """),
     ]
     INVALID = [
         Invalid(
@@ -169,7 +157,7 @@ class NoNamedTuple(LintRule):
     )
 
     def leave_ClassDef(self, original_node: cst.ClassDef) -> None:
-        (namedtuple_base, new_bases) = self.partition_bases(original_node.bases)
+        namedtuple_base, new_bases = self.partition_bases(original_node.bases)
         if namedtuple_base is not None:
             call = ensure_type(parse_expression("dataclass(frozen=True)"), cst.Call)
 

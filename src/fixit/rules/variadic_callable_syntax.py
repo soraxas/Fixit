@@ -17,49 +17,35 @@ class VariadicCallableSyntax(LintRule):
 
     METADATA_DEPENDENCIES = (QualifiedNameProvider,)
     VALID = [
-        Valid(
-            """
+        Valid("""
             from typing import Callable
             x: Callable[[int], int]
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from typing import Callable
             x: Callable[[int, int, ...], int]
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from typing import Callable
             x: Callable
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from typing import Callable as C
             x: C[..., int] = ...
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from typing import Callable
             def foo(bar: Optional[Callable[..., int]]) -> Callable[..., int]:
                 ...
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             import typing as t
             x: t.Callable[..., int] = ...
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from typing import Callable
             x: Callable[..., int] = ...
-            """
-        ),
+            """),
     ]
     INVALID = [
         Invalid(

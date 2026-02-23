@@ -72,16 +72,12 @@ class AvoidOrInExcept(LintRule):
         + "'except ValueError or TypeError' only catches 'ValueError'. Instead, use "
         + "parentheses, 'except (ValueError, TypeError)'"
     )
-    VALID = [
-        Valid(
-            """
+    VALID = [Valid("""
             try:
                 print()
             except (ValueError, TypeError) as err:
                 pass
-            """
-        )
-    ]
+            """)]
 
     INVALID = [
         Invalid(

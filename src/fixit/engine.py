@@ -34,7 +34,7 @@ def diff_violation(path: Path, module: Module, violation: LintViolation) -> str:
     """
 
     orig = module.code
-    mod = module.deep_replace(  # type:ignore # LibCST#906
+    mod = module.deep_replace(  # type: ignore # LibCST#906
         violation.node, violation.replacement
     )
     assert isinstance(mod, Module)

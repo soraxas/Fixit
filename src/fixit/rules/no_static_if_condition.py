@@ -21,34 +21,26 @@ class NoStaticIfCondition(LintRule):
         + "Please double check this logic and if it is actually temporary debug code."
     )
     VALID = [
-        Valid(
-            """
+        Valid("""
             if my_func() or not else_func():
                 pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             if function_call(True):
                 pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             # ew who would this???
             def true():
                 return False
             if true() and else_call():  # True or False
                 pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             # ew who would this???
             if False or some_func():
                 pass
-            """
-        ),
+            """),
     ]
     INVALID = [
         Invalid(

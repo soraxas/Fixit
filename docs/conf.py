@@ -25,12 +25,14 @@ import re
 
 # modified from sphinx/domains/python.py
 py_sig_re = re.compile(
-    r'''^ ([\w.]*\.)?            # class name(s)
+    r"""^ ([\w.]*\.)?            # class name(s)
           ([\w-]+)  \s*             # thing name
           (?: \(\s*(.*)\s*\)     # optional: arguments
            (?:\s* -> \s* (.*))?  #           return annotation
           )? $                   # and nothing more
-          ''', re.VERBOSE)
+          """,
+    re.VERBOSE,
+)
 
 from sphinx.domains import python
 

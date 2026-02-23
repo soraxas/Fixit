@@ -10,7 +10,6 @@ import pkgutil
 import platform
 import sys
 from contextlib import contextmanager, ExitStack
-
 from pathlib import Path
 from types import ModuleType
 from typing import (

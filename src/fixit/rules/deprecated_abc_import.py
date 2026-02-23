@@ -7,11 +7,9 @@ from typing import List, Optional, Union
 
 import libcst as cst
 import libcst.matchers as m
-
 from libcst.metadata import ParentNodeProvider
 
 from fixit import Invalid, LintRule, Valid
-
 
 # The ABCs that have been moved to `collections.abc`
 ABCS = frozenset(
@@ -66,54 +64,42 @@ class DeprecatedABCImport(LintRule):
         Valid("import collections"),
         Valid("import collections.abc"),
         Valid("import collections.abc.Container"),
-        Valid(
-            """
+        Valid("""
             class MyTest(collections.Something):
                 def test(self):
                     pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             try:
                 from collections.abc import Mapping
             except ImportError:
                 from collections import Mapping
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             try:
                 from collections.abc import Mapping, Container
             except ImportError:
                 from collections import Mapping, Container
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             try:
                 from collections.abc import Mapping, Container
             except ImportError:
                 def fallback_import():
                     from collections import Mapping, Container
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             try:
                 from collections.abc import Mapping, Container
             except Exception:
                 exit()
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             try:
                 from collections import defaultdict
             except Exception:
                 exit()
-            """
-        ),
+            """),
     ]
     INVALID = [
         Invalid(

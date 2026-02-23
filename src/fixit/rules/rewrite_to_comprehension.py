@@ -10,7 +10,6 @@ import libcst.matchers as m
 
 from fixit import Invalid, LintRule, Valid
 
-
 UNNECESSARY_GENERATOR: str = (
     "It's unnecessary to use {func} around a generator expression, since "
     + "there are equivalent comprehensions for this type."

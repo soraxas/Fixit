@@ -9,7 +9,6 @@ from libcst.helpers import get_full_name_for_node
 
 from fixit import Invalid, LintRule, Valid
 
-
 UNNECESSARY_LAMBDA: str = (
     "The lambda that is wrapping {function} is redundant. "
     "It can unwrapped safely and used purely."

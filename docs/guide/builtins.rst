@@ -1546,4 +1546,3 @@ Built-in Rules
 
             from fixit import LintRule
             class CatsRuleDogsDroolRule(LintRule): ...
-    

@@ -10,7 +10,6 @@ from libcst.metadata import QualifiedNameProvider, ScopeProvider
 
 from fixit import Invalid, LintRule, Valid
 
-
 REPLACE_BUILTIN_TYPE_ANNOTATION: str = (
     "You are using builtins.{builtin_type} as a type annotation "
     + "but the type system doesn't recognize it as a valid type."
@@ -35,40 +34,30 @@ class UseTypesFromTyping(LintRule):
         ScopeProvider,
     )
     VALID = [
-        Valid(
-            """
+        Valid("""
             def fuction(list: List[str]) -> None:
                 pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             def function() -> None:
                 thing: Dict[str, str] = {}
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             def function() -> None:
                 thing: Tuple[str]
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from typing import Dict, List
             def function() -> bool:
                     return Dict == List
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from typing import List as list
             from graphene import List
 
             def function(a: list[int]) -> List[int]:
                     return []
-            """
-        ),
+            """),
     ]
     INVALID = [
         Invalid(

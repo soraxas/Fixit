@@ -23,36 +23,28 @@ class UseLintFixmeComment(LintRule):
     MESSAGE: str = "noqa is deprecated. Use `lint-fixme` or `lint-ignore` instead."
 
     VALID = [
-        Valid(
-            """
+        Valid("""
             # lint-fixme: UseFstringRule
             "%s" % "hi"
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             # lint-ignore: UsePlusForStringConcatRule
             'ab' 'cd'
-            """
-        ),
+            """),
     ]
     INVALID = [
         Invalid("fn() # noqa"),
-        Invalid(
-            """
+        Invalid("""
             (
              1,
              2,  # noqa
             )
-            """
-        ),
-        Invalid(
-            """
+            """),
+        Invalid("""
             class C:
                 # noqa
                 ...
-            """
-        ),
+            """),
     ]
 
     def visit_Comment(self, node: cst.Comment) -> None:

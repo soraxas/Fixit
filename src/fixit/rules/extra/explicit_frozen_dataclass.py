@@ -27,40 +27,30 @@ class ExplicitFrozenDataclass(LintRule):
     )
     METADATA_DEPENDENCIES = (QualifiedNameProvider,)
     VALID = [
-        Valid(
-            """
+        Valid("""
             @some_other_decorator
             class Cls: pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from dataclasses import dataclass
             @dataclass(frozen=False)
             class Cls: pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             import dataclasses
             @dataclasses.dataclass(frozen=False)
             class Cls: pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             import dataclasses as dc
             @dc.dataclass(frozen=False)
             class Cls: pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from dataclasses import dataclass as dc
             @dc(frozen=False)
             class Cls: pass
-            """
-        ),
+            """),
     ]
     INVALID = [
         Invalid(
