@@ -16,100 +16,76 @@ class UseAsyncSleepInAsyncDef(LintRule):
     MESSAGE: str = "Use asyncio.sleep in async function"
     METADATA_DEPENDENCIES = (QualifiedNameProvider,)
     VALID = [
-        Valid(
-            """
+        Valid("""
             import time
             def func():
                 time.sleep(1)
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from time import sleep
             def func():
                 sleep(1)
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from asyncio import sleep
             async def func():
                 await sleep(1)
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             import asyncio
             async def func():
                 await asyncio.sleep(1)
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             import time
             import asyncio
             def func():
                 time.sleep(1)
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             import time
             import asyncio
             async def func():
                 await asyncio.sleep(1)
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             import time
             import asyncio
             async def func():
                 fut = asyncio.sleep(1)
                 await fut
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             import something
             async def func():
                 something.sleep(3)
-            """
-        ),
+            """),
     ]
     INVALID = [
-        Invalid(
-            """
+        Invalid("""
             import time
             async def func():
                 time.sleep(1)
-            """
-        ),
-        Invalid(
-            """
+            """),
+        Invalid("""
             from time import sleep
             async def func():
                 sleep(1)
-            """
-        ),
-        Invalid(
-            """
+            """),
+        Invalid("""
             from time import sleep
             import asyncio
             async def func():
                 sleep(2)
                 asyncio.sleep(1)
-            """
-        ),
-        Invalid(
-            """
+            """),
+        Invalid("""
             from asyncio import sleep
             import time
             async def func():
                 sleep(2)
                 time.sleep(1)
-            """
-        ),
+            """),
     ]
 
     def __init__(self) -> None:

@@ -39,16 +39,14 @@ class FixitDeprecatedTestCaseKeywords(LintRule):
     METADATA_DEPENDENCIES = (QualifiedNameProvider,)
 
     VALID = [
-        Valid(
-            """
+        Valid("""
             from fixit import InvalidTestCase
 
             InvalidTestCase(
                 "print('hello')",
                 message="oops",
             )
-            """
-        ),
+            """),
     ]
     INVALID = [
         Invalid(

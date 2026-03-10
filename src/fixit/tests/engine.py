@@ -23,12 +23,10 @@ from ..ftypes import LintViolation
 
 class EngineTest(TestCase):
     def test_diff_violation(self) -> None:
-        src = dedent(
-            """\
+        src = dedent("""\
                 import sys
                 print("hello world")
-            """
-        )
+            """)
         path = Path("foo.py")
         module = parse_module(src)
         node = ensure_type(
@@ -47,15 +45,13 @@ class EngineTest(TestCase):
             replacement=repl,
         )
 
-        expected = dedent(
-            """\
+        expected = dedent("""\
                 --- a/foo.py
                 +++ b/foo.py
                 @@ -1,2 +1,2 @@
                  import sys
                 -print("hello world")
                 +print("goodnight moon")
-            """
-        )
+            """)
         result = diff_violation(path, module, violation)
         self.assertEqual(expected, result)

@@ -18,11 +18,9 @@ class NoInheritFromObject(LintRule):
     MESSAGE = "Inheriting from object is a no-op.  'class Foo:' is just fine =)"
     VALID = [
         Valid("class A(something):    pass"),
-        Valid(
-            """
+        Valid("""
             class A:
-                pass"""
-        ),
+                pass"""),
     ]
     INVALID = [
         Invalid(

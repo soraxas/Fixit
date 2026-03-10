@@ -11,7 +11,6 @@ from textwrap import dedent
 from unittest import TestCase
 
 import pygls.uris as Uri
-
 from click.testing import CliRunner
 
 from fixit import __version__
@@ -28,34 +27,28 @@ class SmokeTest(TestCase):
         self.assertIn(expected, result.stdout)
 
     def test_file_with_formatting(self) -> None:
-        content = dedent(
-            """\
+        content = dedent("""\
                 import foo
                 import bar
 
                 def func():
                     value = f"hello world"
-            """
-        )
-        expected_fix = dedent(
-            """\
+            """)
+        expected_fix = dedent("""\
                 import foo
                 import bar
 
                 def func():
                     value = "hello world"
-            """
-        )
-        expected_format = dedent(
-            """\
+            """)
+        expected_format = dedent("""\
                 import bar
                 import foo
 
 
                 def func():
                     value = "hello world"
-            """
-        )
+            """)
         with TemporaryDirectory() as td:
             tdp = Path(td).resolve()
             path = tdp / "file.py"
@@ -260,44 +253,32 @@ class SmokeTest(TestCase):
         with TemporaryDirectory() as td:
             tdp = Path(td).resolve()
             clean = tdp / "clean.py"
-            clean.write_text(
-                dedent(
-                    """
+            clean.write_text(dedent("""
                     GLOBAL = 'hello'
 
                     def foo():
                         value = 'test'
                         if value is False:
                             pass
-                    """
-                )
-            )
+                    """))
             single = tdp / "single.py"
-            single.write_text(
-                dedent(
-                    """
+            single.write_text(dedent("""
                     GLOBAL = f'hello'
 
                     def foo():
                         value = 'test'
                         if value is False:
                             pass
-                    """
-                )
-            )
+                    """))
             multi = tdp / "multi.py"
-            multi.write_text(
-                dedent(
-                    """
+            multi.write_text(dedent("""
                     GLOBAL = f'hello'
 
                     def foo():
                         value = f'test'
                         if value == False:
                             pass
-                    """
-                )
-            )
+                    """))
 
             expected = clean.read_text()
 
@@ -333,15 +314,13 @@ class SmokeTest(TestCase):
                 self.assertEqual(expected, multi.read_text())
 
     def test_lint_directory_with_no_rules_enabled(self) -> None:
-        content = dedent(
-            """\
+        content = dedent("""\
                 import foo
                 import bar
 
                 def func():
                     value = f"hello world"
-            """
-        )
+            """)
         with self.subTest("lint"):
             with TemporaryDirectory() as td:
                 tdp = Path(td).resolve()

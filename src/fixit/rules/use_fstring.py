@@ -11,7 +11,6 @@ import libcst.matchers as m
 
 from fixit import Invalid, LintRule, Valid
 
-
 USE_FSTRING_SIMPLE_EXPRESSION_MAX_LENGTH = 30
 
 

@@ -8,7 +8,6 @@ from textwrap import dedent, indent
 
 from fixit.config import find_rules
 from fixit.ftypes import QualifiedRule
-
 from jinja2 import Template
 
 RULES = ["fixit.rules", "fixit.rules.extra", "fixit.upgrade"]

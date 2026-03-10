@@ -38,9 +38,7 @@ class ConfigTest(TestCase):
         self.inner = self.tdp / "outer" / "inner"
         self.inner.mkdir(parents=True)
 
-        (self.tdp / "pyproject.toml").write_text(
-            dedent(
-                """
+        (self.tdp / "pyproject.toml").write_text(dedent("""
                 [tool.fixit]
                 root = true
                 enable-root-import = true
@@ -54,37 +52,23 @@ class ConfigTest(TestCase):
                 disable = ["fixit.rules"]
                 options = {"other.stuff.Whatever"={key="value"}}
                 python-version = "3.10"
-                """
-            )
-        )
-        (self.outer / ".fixit.toml").write_text(
-            dedent(
-                """
+                """))
+        (self.outer / ".fixit.toml").write_text(dedent("""
                 [tool.fixit]
                 enable = [".localrules"]
                 disable = ["fixit.rules"]
-                """
-            )
-        )
-        (self.inner / "pyproject.toml").write_text(
-            dedent(
-                """
+                """))
+        (self.inner / "pyproject.toml").write_text(dedent("""
                 [tool.fuzzball]
                 something = "whatever"
-                """
-            )
-        )
-        (self.inner / "fixit.toml").write_text(
-            dedent(
-                """
+                """))
+        (self.inner / "fixit.toml").write_text(dedent("""
                 [tool.fixit]
                 root = true
                 enable = ["fake8", "make8"]
                 disable = ["foo.bar"]
                 unknown = "hello"
-                """
-            )
-        )
+                """))
 
     def tearDown(self) -> None:
         self.td.cleanup()
@@ -603,14 +587,10 @@ class ConfigTest(TestCase):
 
     def test_format_output(self) -> None:
         with chdir(self.tdp):
-            (self.tdp / "pyproject.toml").write_text(
-                dedent(
-                    """
+            (self.tdp / "pyproject.toml").write_text(dedent("""
                     [tool.fixit]
                     output-format = "vscode"
-                    """
-                )
-            )
+                    """))
 
             runner = CliRunner(mix_stderr=False)
             content = "name = '{name}'.format(name='Jane Doe')"
@@ -634,15 +614,11 @@ class ConfigTest(TestCase):
             custom_output_format = (
                 "{path}|{start_line}|{start_col} {rule_name}: {message}"
             )
-            (self.tdp / "pyproject.toml").write_text(
-                dedent(
-                    f"""
+            (self.tdp / "pyproject.toml").write_text(dedent(f"""
                     [tool.fixit]
                     output-format = 'custom'
                     output-template = '{custom_output_format}'
-                    """
-                )
-            )
+                    """))
 
             with self.subTest("linting custom"):
                 result = runner.invoke(
@@ -684,13 +660,11 @@ class ConfigTest(TestCase):
             with TemporaryDirectory() as td:
                 tdp = Path(td).resolve()
                 path = tdp / ".fixit.toml"
-                path.write_text(
-                    """
+                path.write_text("""
                     [tool.fixit]
                     disable = ["fixit.rules"]
                     root = true
-                    """
-                )
+                    """)
 
                 results = config.validate_config(path)
 
@@ -705,8 +679,7 @@ class ConfigTest(TestCase):
 
                 (tdp / "rule/rule.py").write_text("# Rule")
                 (tdp / "rule/ruledir/rule.py").write_text("# Rule")
-                path.write_text(
-                    """
+                path.write_text("""
                     [tool.fixit]
                     disable = ["fixit.rules"]
                     root = true
@@ -718,8 +691,7 @@ class ConfigTest(TestCase):
                     [[tool.fixit.overrides]]
                     path = "SUPER_REAL_PATH/BUT_ACTUALLY_REAL"
                     enable = [".rule.ruledir.rule"]
-                    """
-                )
+                    """)
 
                 results = config.validate_config(path)
 
@@ -729,14 +701,12 @@ class ConfigTest(TestCase):
             with TemporaryDirectory() as td:
                 tdp = Path(td).resolve()
                 path = tdp / ".fixit.toml"
-                path.write_text(
-                    """
+                path.write_text("""
                     [tool.fixit]
                     enable = ["fixit/rules:DeprecatedABCImport"]
                     disable = ["fixit.rules"]
                     root = true
-                    """
-                )
+                    """)
 
                 results = config.validate_config(path)
 
@@ -751,8 +721,7 @@ class ConfigTest(TestCase):
             with TemporaryDirectory() as td:
                 tdp = Path(td).resolve()
                 config_path = tdp / ".fixit.toml"
-                config_path.write_text(
-                    """
+                config_path.write_text("""
                     [tool.fixit]
                     enable = ["fixit/rules:DeprecatedABCImport"]
                     disable = ["fixit.rules"]
@@ -761,8 +730,7 @@ class ConfigTest(TestCase):
                     [[tool.fixit.overrides]]
                     path = "SUPER_REAL_PATH"
                     enable = ["fixit.rules:DeprecatedABCImport_SUPER_REAL"]
-                    """
-                )
+                    """)
 
                 path = tdp / "file.py"
                 path.write_text("error")

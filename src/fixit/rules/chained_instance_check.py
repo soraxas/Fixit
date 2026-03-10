@@ -11,7 +11,6 @@ from libcst.metadata import QualifiedName, QualifiedNameProvider, QualifiedNameS
 
 from fixit import Invalid, LintRule, Valid
 
-
 _ISINSTANCE = QualifiedName(
     name="builtins.isinstance", source=QualifiedNameSource.BUILTIN
 )
@@ -47,15 +46,13 @@ class CollapseIsinstanceChecks(LintRule):
         Valid("isinstance(x, y) or isinstance(x, (z, q))"),
         Valid("isinstance(x, (y, z)) or isinstance(x, q)"),
         Valid("isinstance(x, a) or isinstance(y, b) or isinstance(z, c)"),
-        Valid(
-            """
+        Valid("""
             def foo():
                 def isinstance(x, y):
                     return _foo_bar(x, y)
                 if isinstance(x, y) or isinstance(x, z):
                     print("foo")
-            """
-        ),
+            """),
     ]
     INVALID = [
         Invalid(

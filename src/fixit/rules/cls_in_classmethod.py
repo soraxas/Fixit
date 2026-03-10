@@ -16,7 +16,6 @@ from libcst.metadata import (
 
 from fixit import Invalid, LintRule, Valid
 
-
 CLS = "cls"
 
 
@@ -45,32 +44,26 @@ class UseClsInClassmethod(LintRule):
     METADATA_DEPENDENCIES = (QualifiedNameProvider, ScopeProvider)
     MESSAGE = "When using @classmethod, the first argument must be `cls`."
     VALID = [
-        Valid(
-            """
+        Valid("""
             class foo:
                 # classmethod with cls first arg.
                 @classmethod
                 def cm(cls, a, b, c):
                     pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             class foo:
                 # non-classmethod with non-cls first arg.
                 def nm(self, a, b, c):
                     pass
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             class foo:
                 # staticmethod with non-cls first arg.
                 @staticmethod
                 def sm(a):
                     pass
-            """
-        ),
+            """),
     ]
     INVALID = [
         Invalid(

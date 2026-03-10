@@ -10,7 +10,6 @@ import libcst.matchers as m
 
 from fixit import Invalid, LintRule, Valid
 
-
 UNNECESSARY_LITERAL: str = (
     "It's unnecessary to use a list or tuple within a call to {func} since"
     + " there is literal syntax for this type"

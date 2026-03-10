@@ -18,37 +18,27 @@ class FixitRemoveRuleSuffix(LintRule):
     METADATA_DEPENDENCIES = (FullyQualifiedNameProvider,)
 
     VALID = [
-        Valid(
-            """
+        Valid("""
             import fixit
             class DontTryThisAtHome(fixit.LintRule): ...
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             from fixit import LintRule
             class CatsRuleDogsDrool(LintRule): ...
-            """
-        ),
-        Valid(
-            """
+            """),
+        Valid("""
             class NotALintRule: ...
-            """
-        ),
+            """),
     ]
     INVALID = [
-        Invalid(
-            """
+        Invalid("""
             import fixit
             class DontTryThisAtHomeRule(fixit.LintRule): ...
-            """
-        ),
-        Invalid(
-            """
+            """),
+        Invalid("""
             from fixit import LintRule
             class CatsRuleDogsDroolRule(LintRule): ...
-            """
-        ),
+            """),
     ]
 
     def visit_ClassDef(self, node: libcst.ClassDef) -> None:

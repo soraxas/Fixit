@@ -41,7 +41,7 @@ jobs:
         run: make EXTRAS=dev,lsp install
       - name: Test
         run: make test
-  
+
   pyrefly:
     runs-on: ubuntu-latest
     steps:
